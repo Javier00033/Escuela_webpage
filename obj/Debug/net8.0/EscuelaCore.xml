@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EscuelaCore</name>
+    </assembly>
+    <members>
+        <member name="T:EscuelaCore.Controllers.AlumnosController">
+            <summary>
+            Controlador para la gestión de alumnos.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.GetAlumnos(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Obtiene la lista paginada de alumnos activos.
+            </summary>
+            <param name="busqueda">Texto para buscar por nombre, apellidos o CI.</param>
+            <param name="filtroCI">Filtro exacto por CI.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de alumnos.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.GetAlumno(System.Int32)">
+            <summary>
+            Obtiene los detalles de un alumno por su Id.
+            </summary>
+            <param name="id">Id del alumno.</param>
+            <returns>Datos de un alumno.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.CreateAlumno(EscuelaCore.Dto.RequestsDto.CreateAlumnoRequestDto)">
+            <summary>
+            Crea un nuevo alumno y lo matricula en el curso actual.
+            </summary>
+            <param name="request">Datos del alumno a crear.</param>
+            <returns>Datos del alumno creado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.UpdateAlumno(System.Int32,EscuelaCore.Dto.RequestsDto.UpdateAlumnoRequestDto)">
+            <summary>
+            Actualiza los datos de un alumno existente.
+            </summary>
+            <param name="id">Id del alumno a actualizar.</param>
+            <param name="request">Datos actualizados del alumno.</param>
+            <returns>Datos del alumno actualizado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.DarBajaAlumno(System.Int32)">
+            <summary>
+            Da de baja a un alumno (desactiva su cuenta).
+            </summary>
+            <param name="id">Id del alumno a dar de baja.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.RestaurarAlumno(System.Int32)">
+            <summary>
+            Restaura (reactiva) un alumno dado de baja previamente.
+            </summary>
+            <param name="id">Id del alumno a restaurar.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AlumnosController.GetEvaluacionesAlumno(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene las evaluaciones de un alumno por su Id.
+            </summary>
+            <param name="id">Id del alumno.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de evaluaciones del alumno.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.AulasController">
+            <summary>
+            Controlador para la gestión de aulas.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AulasController.GetAulas(System.Int32,System.Int32)">
+            <summary>
+            Obtiene la lista paginada de aulas.
+            </summary>
+            <returns>Lista paginada de aulas.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AulasController.GetAula(System.Int32)">
+            <summary>
+            Obtiene los detalles de un aula por su id.
+            </summary>
+            <param name="id">Id del aula.</param>
+            <returns>Datos del aula.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AulasController.UpdateAula(System.Int32,EscuelaCore.Dto.RequestsDto.UpdateAulaRequestDto)">
+            <summary>
+            Actualiza los datos de un aula existente.
+            </summary>
+            <param name="id">Id del aula a actualizar.</param>
+            <param name="request">Datos actualizados del aula.</param>
+            <returns>Datos del aula actualizada.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.AuthController">
+            <summary>
+            Controlador para autenticación y registro de usuarios.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AuthController.AdminUserCreate(EscuelaCore.Dto.RequestsDto.CreateAdminRequestDto)">
+            <summary>
+            Crea un nuevo usuario Administrador.
+            </summary>
+            <param name="request">Datos del usuario a crear.</param>
+            <returns>Id del usuario creado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.AuthController.Login(EscuelaCore.Dto.RequestsDto.LoginRequestDto)">
+            <summary>
+            Inicia sesión y genera un token JWT para el usuario.
+            </summary>
+            <param name="request">Datos de acceso del usuario.</param>
+            <returns>Token JWT y datos del usuario autenticado.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.CursosController">
+            <summary>
+            Controlador para la gestión de cursos escolares.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.CursosController.CreateCurso(EscuelaCore.Dto.RequestsDto.CreateCursoRequestDto)">
+            <summary>
+            Crea un nuevo curso escolar.
+            </summary>
+            <param name="request">Datos del curso a crear.</param>
+            <returns>Datos del curso creado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.CursosController.FinalizarCurso(System.Int32)">
+            <summary>
+            Finaliza un curso escolar existente.
+            </summary>
+            <param name="id">Id del curso a finalizar.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.CursosController.GetCurso(System.Int32)">
+            <summary>
+            Obtiene los detalles de un curso por su id.
+            </summary>
+            <param name="id">Id del curso.</param>
+            <returns>Datos del curso.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.CursosController.GetCursos(System.Int32,System.Int32)">
+            <summary>
+            Obtiene la lista paginada de cursos escolares.
+            </summary>
+            <returns>Lista paginada de cursos.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.EvaluacionesController">
+            <summary>
+            Controlador para la gestión de evaluaciones.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.EvaluacionesController.CreateEvaluacion(EscuelaCore.Dto.RequestsDto.CreateEvaluacionRequestDto)">
+            <summary>
+            Crea una nueva evaluación para un alumno en una asignatura.
+            </summary>
+            <param name="request">Datos de la evaluación a crear.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.EvaluacionesController.GetEvaluacionesAlumnoAsignatura(System.Int32,EscuelaCore.Enums.Asignatura,System.Int32,System.Int32)">
+            <summary>
+            Obtiene las evaluaciones de un alumno en una asignatura específica.
+            </summary>
+            <param name="alumnoId">Id del alumno.</param>
+            <param name="asignatura">Asignatura a consultar.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de evaluaciones.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.EvaluacionesController.UpdateNota(System.Int32,EscuelaCore.Dto.RequestsDto.UpdateEvaluacionRequestDto)">
+            <summary>
+            Actualiza los datos de una evaluación existente.
+            </summary>
+            <param name="id">ID de la evaluación a actualizar.</param>
+            <param name="request">Datos actualizados de la evaluación.</param>
+            <returns>Datos de la evaluación actualizada.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.EvaluacionesController.DeleteEvaluacion(System.Int32)">
+            <summary>
+            Elimina una evaluación existente.
+            </summary>
+            <param name="id">ID de la evaluación a eliminar.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.MatriculasController">
+            <summary>
+            Controlador para la gestión de matrículas.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.MatriculasController.CreateMatricula(EscuelaCore.Dto.RequestsDto.CreateMatriculaRequestDto)">
+            <summary>
+            Crea una nueva matrícula para un alumno en un aula y carrera.
+            </summary>
+            <param name="request">Datos de la matrícula a crear.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.MatriculasController.UpdateMatricula(System.Int32,EscuelaCore.Dto.RequestsDto.UpdateMatriculaRequestDto)">
+            <summary>
+            Actualiza una matrícula existente de un alumno.
+            </summary>
+            <param name="id">Id de la matrícula a actualizar.</param>
+            <param name="request">Datos actualizados de la matrícula.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.MatriculasController.GetMatriculasAlumno(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene las matrículas de un alumno por su id.
+            </summary>
+            <param name="id">ID del alumno.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de matrículas del alumno.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.ProfesoresController">
+            <summary>
+            Controlador para la gestión de profesores.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.GetProfesores(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Obtiene la lista paginada de profesores activos.
+            </summary>
+            <param name="busqueda">Texto para buscar por nombre, apellidos o CI.</param>
+            <param name="filtroCI">Filtro exacto por CI.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de profesores.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.GetProfesor(System.Int32)">
+            <summary>
+            Obtiene los detalles de un profesor por su id.
+            </summary>
+            <param name="id">Id del profesor.</param>
+            <returns>Datos de un profesor.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.CreateProfesor(EscuelaCore.Dto.RequestsDto.CreateProfesorRequestDto)">
+            <summary>
+            Crea un nuevo profesor y le asigna aulas.
+            </summary>
+            <param name="request">Datos del profesor a crear.</param>
+            <returns>Datos del profesor creado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.UpdateProfesor(System.Int32,EscuelaCore.Dto.RequestsDto.UpdateProfesorRequestDto)">
+            <summary>
+            Actualiza los datos de un profesor existente.
+            </summary>
+            <param name="id">Id del profesor a actualizar.</param>
+            <param name="request">Datos actualizados del profesor.</param>
+            <returns>Datos del profesor actualizado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.DarBajaProfesor(System.Int32)">
+            <summary>
+            Da de baja a un profesor (desactiva su cuenta).
+            </summary>
+            <param name="id">Id del profesor a dar de baja.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.RestaurarProfesor(System.Int32)">
+            <summary>
+            Restaura (reactiva) un profesor dado de baja previamente.
+            </summary>
+            <param name="id">Id del profesor a restaurar.</param>
+            <returns>Resultado de la operación.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ProfesoresController.GetEvaluacionesProfesor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene las evaluaciones de un profesor por su Id.
+            </summary>
+            <param name="id">Id del profesor.</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de evaluaciones del profesor.</returns>
+        </member>
+        <member name="T:EscuelaCore.Controllers.ReportesController">
+            <summary>
+            Controlador para reportes y consultas avanzadas.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ReportesController.GetAulasConAlumnos(System.Int32,System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Obtiene las aulas y alumnos asignados a un profesor en el curso actual.
+            </summary>
+            <param name="profesorId">ID del profesor.</param>
+            <param name="filtroAulasId">IDs de aulas para filtrar (opcional).</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de aulas y alumnos.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ReportesController.GetEvaluacionesPorAulasPorAño(System.Int32,System.Int32[],System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Obtiene las evaluaciones por aula y año para un profesor.
+            </summary>
+            <param name="profesorId">ID del profesor.</param>
+            <param name="filtroAños">Año escolar para filtrar.</param>
+            <param name="filtroAulasId">IDs de aulas para filtrar (opcional).</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Lista paginada de evaluaciones por aula y año.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ReportesController.GetEvaluacionesAlumnoCursoActual(System.Int32)">
+            <summary>
+            Obtiene las evaluaciones del alumno en el curso actual.
+            </summary>
+            <param name="alumnoId">ID del alumno.</param>
+            <returns>Evaluaciones del alumno en el curso actual.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ReportesController.GetEvaluacionesAlumnoPorAño(System.Int32,System.Int32[])">
+            <summary>
+            Obtiene las evaluaciones del alumno agrupadas por año.
+            </summary>
+            <param name="alumnoId">ID del alumno.</param>
+            <param name="filtroAños">Años para filtrar (opcional).</param>
+            <returns>Evaluaciones del alumno por año.</returns>
+        </member>
+        <member name="M:EscuelaCore.Controllers.ReportesController.GetMatriculasYBajasPorAño(System.Int32[],EscuelaCore.Enums.Carrera[],System.Int32,System.Int32)">
+            <summary>
+            Obtiene el reporte de matrículas y bajas por año y carrera.
+            </summary>
+            <param name="filtroAños">Años para filtrar (opcional).</param>
+            <param name="filtroCarreras">Carreras para filtrar (opcional).</param>
+            <param name="pagina"></param>
+            <param name="cantidadDeRegistrosPorPagina"></param>
+            <returns>Reporte de matrículas y bajas por año.</returns>
+        </member>
+        <member name="T:EscuelaCore.Migrations.Creacion_bd">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.Creacion_bd.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.Creacion_bd.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.Creacion_bd.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:EscuelaCore.Migrations.MejoraDeUsuarios">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:EscuelaCore.Migrations.MejoraDeUsuarios2">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.MejoraDeUsuarios2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:EscuelaCore.Migrations.AulasEnAlumnosNullables">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.AulasEnAlumnosNullables.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.AulasEnAlumnosNullables.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.AulasEnAlumnosNullables.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:EscuelaCore.Migrations.includeCursosIdMatricula">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.includeCursosIdMatricula.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.includeCursosIdMatricula.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EscuelaCore.Migrations.includeCursosIdMatricula.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:EscuelaCore.Services.Implementations.AlumnoService">
+            <summary>
+            Servicio para operaciones relacionadas con alumnos.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AlumnoService.AlumnoAproboCarrera(System.Int32,EscuelaCore.Enums.Carrera)">
+            <summary>
+            Verifica si el alumno aprobó todas las asignaturas requeridas de la carrera en cualquier curso.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AlumnoService.GetAsignaturasPorCarrera(EscuelaCore.Enums.Carrera)">
+            <summary>
+            Obtiene las asignaturas por carrera.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AlumnoService.ObtenerCarreraAprobada(System.Int32)">
+            <summary>
+            Obtiene qué carrera tiene aprobada el alumno (null si ninguna)
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AlumnoService.AlumnoTieneCarreraAprobada(System.Int32)">
+            <summary>
+            Verifica si el alumno tiene alguna carrera aprobada
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AlumnoService.PuedeMatricularseEnCarrera(System.Int32,EscuelaCore.Enums.Carrera)">
+            <summary>
+            Verifica si el alumno puede matricularse en la carrera solicitada
+            </summary>
+        </member>
+        <member name="T:EscuelaCore.Services.Implementations.AulaService">
+            <summary>
+            Servicio para operaciones relacionadas con aulas.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.AulaService.AulaTieneClaustroCompleto(System.Int32,EscuelaCore.Enums.Carrera)">
+            <summary>
+            Verifica si el aula tiene todos los profesores requeridos para la carrera en el curso actual.
+            </summary>
+            <param name="aulaId">ID del aula.</param>
+            <param name="carrera">Carrera a verificar.</param>
+            <returns>True si el claustro está completo, false en caso contrario.</returns>
+        </member>
+        <member name="T:EscuelaCore.Services.Implementations.JwtService">
+            <summary>
+            Servicio para generación y validación de tokens JWT.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.JwtService.GenerateJwtToken(System.Collections.Generic.List{System.Security.Claims.Claim})">
+            <summary>
+            Genera un token JWT a partir de una lista de claims.
+            </summary>
+            <param name="claims">Lista de claims para el token.</param>
+            <returns>Token JWT generado.</returns>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.JwtService.ValidateJwtToken(System.String)">
+            <summary>
+            Valida un token JWT y retorna los claims del usuario.
+            </summary>
+            <param name="token">Token JWT a validar.</param>
+            <returns>ClaimsPrincipal con los claims del usuario.</returns>
+        </member>
+        <member name="T:EscuelaCore.Services.Implementations.TrazaService">
+            <summary>
+            Servicio para registrar trazas (logs de auditoría) en la base de datos.
+            </summary>
+        </member>
+        <member name="M:EscuelaCore.Services.Implementations.TrazaService.RegistrarTrazaAsync(System.String,System.String,System.String)">
+            <summary>
+            Registra una traza en la base de datos.
+            </summary>
+            <param name="mensaje">Mensaje de la traza.</param>
+            <param name="operacion">Operación realizada.</param>
+            <param name="usuario">Usuario que realizó la operación.</param>
+        </member>
+        <member name="M:UsuarioService.CrearUsuarioAsync(System.String,System.String,System.String)">
+            <summary>
+            Crea un usuario automáticamente.
+            </summary>
+        </member>
+    </members>
+</doc>

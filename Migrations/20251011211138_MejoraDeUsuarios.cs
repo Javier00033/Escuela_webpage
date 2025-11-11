@@ -1,0 +1,133 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace EscuelaCore.Migrations
+{
+    /// <inheritdoc />
+    public partial class MejoraDeUsuarios : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Apellidos",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Nombre",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "UsuarioNombre",
+                table: "AspNetUsers");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Capacidad",
+                table: "Aulas",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 4,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 5,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 6,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 7,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 8,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 9,
+                column: "Capacidad",
+                value: 5);
+
+            migrationBuilder.UpdateData(
+                table: "Aulas",
+                keyColumn: "Id",
+                keyValue: 10,
+                column: "Capacidad",
+                value: 5);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Capacidad",
+                table: "Aulas");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Apellidos",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Nombre",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "UsuarioNombre",
+                table: "AspNetUsers",
+                type: "nvarchar(250)",
+                maxLength: 250,
+                nullable: false,
+                defaultValue: "");
+        }
+    }
+}

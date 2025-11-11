@@ -1,0 +1,2801 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Escuela API",
+    "description": "API para gestión escolar",
+    "contact": {
+      "name": "EscuelaCore",
+      "email": "admin@escuelacore.com"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Alumnos": {
+      "get": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Obtiene la lista paginada de alumnos activos.",
+        "parameters": [
+          {
+            "name": "busqueda",
+            "in": "query",
+            "description": "Texto para buscar por nombre, apellidos o CI.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "filtroCI",
+            "in": "query",
+            "description": "Filtro exacto por CI.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Crea un nuevo alumno y lo matricula en el curso actual.",
+        "requestBody": {
+          "description": "Datos del alumno a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlumnoRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlumnoRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlumnoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alumnos/{id}": {
+      "get": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Obtiene los detalles de un alumno por su Id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del alumno.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Actualiza los datos de un alumno existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del alumno a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos actualizados del alumno.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlumnoRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlumnoRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlumnoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlumnoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Da de baja a un alumno (desactiva su cuenta).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del alumno a dar de baja.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Alumnos/{id}/restaurar": {
+      "post": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Restaura (reactiva) un alumno dado de baja previamente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del alumno a restaurar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Alumnos/{id}/evaluaciones": {
+      "get": {
+        "tags": [
+          "Alumnos"
+        ],
+        "summary": "Obtiene las evaluaciones de un alumno por su Id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del alumno.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Aulas": {
+      "get": {
+        "tags": [
+          "Aulas"
+        ],
+        "summary": "Obtiene la lista paginada de aulas.",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AulaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AulaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AulaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Aulas/{id}": {
+      "get": {
+        "tags": [
+          "Aulas"
+        ],
+        "summary": "Obtiene los detalles de un aula por su id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del aula.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Aulas"
+        ],
+        "summary": "Actualiza los datos de un aula existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del aula a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos actualizados del aula.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAulaRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAulaRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAulaRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulaDetallesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Crea un nuevo usuario Administrador.",
+        "requestBody": {
+          "description": "Datos del usuario a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Inicia sesión y genera un token JWT para el usuario.",
+        "requestBody": {
+          "description": "Datos de acceso del usuario.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cursos": {
+      "post": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Crea un nuevo curso escolar.",
+        "requestBody": {
+          "description": "Datos del curso a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCursoRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCursoRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCursoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Obtiene la lista paginada de cursos escolares.",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Cursos/{id}/finalizar": {
+      "post": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Finaliza un curso escolar existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del curso a finalizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cursos/{id}": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Obtiene los detalles de un curso por su id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del curso.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Evaluaciones": {
+      "post": {
+        "tags": [
+          "Evaluaciones"
+        ],
+        "summary": "Crea una nueva evaluación para un alumno en una asignatura.",
+        "requestBody": {
+          "description": "Datos de la evaluación a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEvaluacionRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEvaluacionRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEvaluacionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Evaluaciones/alumno/{alumnoId}/asignatura/{asignatura}": {
+      "get": {
+        "tags": [
+          "Evaluaciones"
+        ],
+        "summary": "Obtiene las evaluaciones de un alumno en una asignatura específica.",
+        "parameters": [
+          {
+            "name": "alumnoId",
+            "in": "path",
+            "description": "Id del alumno.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "asignatura",
+            "in": "path",
+            "description": "Asignatura a consultar.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Asignatura"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Evaluaciones/{id}": {
+      "put": {
+        "tags": [
+          "Evaluaciones"
+        ],
+        "summary": "Actualiza los datos de una evaluación existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la evaluación a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos actualizados de la evaluación.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEvaluacionRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEvaluacionRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEvaluacionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Evaluaciones"
+        ],
+        "summary": "Elimina una evaluación existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la evaluación a eliminar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Matriculas": {
+      "post": {
+        "tags": [
+          "Matriculas"
+        ],
+        "summary": "Crea una nueva matrícula para un alumno en un aula y carrera.",
+        "requestBody": {
+          "description": "Datos de la matrícula a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatriculaRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatriculaRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatriculaRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Matriculas/{id}": {
+      "put": {
+        "tags": [
+          "Matriculas"
+        ],
+        "summary": "Actualiza una matrícula existente de un alumno.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id de la matrícula a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos actualizados de la matrícula.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatriculaRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatriculaRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatriculaRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Matriculas/alumno/{id}": {
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "summary": "Obtiene las matrículas de un alumno por su id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del alumno.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaListaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaListaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaListaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profesores": {
+      "get": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Obtiene la lista paginada de profesores activos.",
+        "parameters": [
+          {
+            "name": "busqueda",
+            "in": "query",
+            "description": "Texto para buscar por nombre, apellidos o CI.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtroCI",
+            "in": "query",
+            "description": "Filtro exacto por CI.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Crea un nuevo profesor y le asigna aulas.",
+        "requestBody": {
+          "description": "Datos del profesor a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProfesorRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProfesorRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProfesorRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profesores/{id}": {
+      "get": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Obtiene los detalles de un profesor por su id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del profesor.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Actualiza los datos de un profesor existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del profesor a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos actualizados del profesor.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfesorRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfesorRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfesorRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Da de baja a un profesor (desactiva su cuenta).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del profesor a dar de baja.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profesores/{id}/restaurar": {
+      "post": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Restaura (reactiva) un profesor dado de baja previamente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del profesor a restaurar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profesores/{id}/evaluaciones": {
+      "get": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Obtiene las evaluaciones de un profesor por su Id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id del profesor.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluacionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/aulas-con-alumnos-profesor": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "summary": "Obtiene las aulas y alumnos asignados a un profesor en el curso actual.",
+        "parameters": [
+          {
+            "name": "profesorId",
+            "in": "query",
+            "description": "ID del profesor.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "filtroAulasId",
+            "in": "query",
+            "description": "IDs de aulas para filtrar (opcional).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulasConAlumnosReporteDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulasConAlumnosReporteDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AulasConAlumnosReporteDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/evaluaciones-por-año-profesor": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "summary": "Obtiene las evaluaciones por aula y año para un profesor.",
+        "parameters": [
+          {
+            "name": "profesorId",
+            "in": "query",
+            "description": "ID del profesor.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "filtroAños",
+            "in": "query",
+            "description": "Año escolar para filtrar.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "filtroAulasId",
+            "in": "query",
+            "description": "IDs de aulas para filtrar (opcional).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesPorAulasPorAñoReporteDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesPorAulasPorAñoReporteDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesPorAulasPorAñoReporteDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/evaluaciones-curso-actual": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "summary": "Obtiene las evaluaciones del alumno en el curso actual.",
+        "parameters": [
+          {
+            "name": "alumnoId",
+            "in": "query",
+            "description": "ID del alumno.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoCursoActualReporteDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoCursoActualReporteDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoCursoActualReporteDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/evaluaciones-por-año": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "summary": "Obtiene las evaluaciones del alumno agrupadas por año.",
+        "parameters": [
+          {
+            "name": "alumnoId",
+            "in": "query",
+            "description": "ID del alumno.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "filtroAños",
+            "in": "query",
+            "description": "Años para filtrar (opcional).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoPorAñoReporteDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoPorAñoReporteDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionesAlumnoPorAñoReporteDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/matriculas-bajas": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "summary": "Obtiene el reporte de matrículas y bajas por año y carrera.",
+        "parameters": [
+          {
+            "name": "filtroAños",
+            "in": "query",
+            "description": "Años para filtrar (opcional).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "filtroCarreras",
+            "in": "query",
+            "description": "Carreras para filtrar (opcional).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Carrera"
+              }
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "cantidadDeRegistrosPorPagina",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AñoMatriculasBajasDtoPaginacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AñoMatriculasBajasDtoPaginacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AñoMatriculasBajasDtoPaginacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlumnoDto": {
+        "required": [
+          "ci",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "ci": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlumnoDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlumnoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlumnoEvaluacionDto": {
+        "type": "object",
+        "properties": {
+          "nombreCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "asignatura": {
+            "type": "string",
+            "nullable": true
+          },
+          "calificacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Asignatura": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "AulaDetallesDto": {
+        "required": [
+          "matriculas",
+          "profesorAulas"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          },
+          "profesorAulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfesorAulaDto"
+            },
+            "nullable": true
+          },
+          "matriculas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatriculaAulaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AulaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          },
+          "profesorAula": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alumnosAula": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AulaEvaluacionesDto": {
+        "type": "object",
+        "properties": {
+          "numeroAula": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "type": "string",
+            "nullable": true
+          },
+          "alumnos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlumnoEvaluacionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AulaProfesorDto": {
+        "type": "object",
+        "properties": {
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AulasConAlumnosReporteDto": {
+        "type": "object",
+        "properties": {
+          "profesor": {
+            "type": "string",
+            "nullable": true
+          },
+          "cursosActuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CursoActualDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AulasConAlumnosReporteDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AulasConAlumnosReporteDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AñoEscolarDto": {
+        "type": "object",
+        "properties": {
+          "año": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AulaEvaluacionesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AñoEvaluacionesDto": {
+        "type": "object",
+        "properties": {
+          "año": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluaciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluacionAlumnoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AñoMatriculasBajasDto": {
+        "type": "object",
+        "properties": {
+          "año": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carreras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarreraMatriculasBajasDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AñoMatriculasBajasDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AñoMatriculasBajasDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Carrera": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CarreraMatriculasBajasDto": {
+        "type": "object",
+        "properties": {
+          "carrera": {
+            "type": "string",
+            "nullable": true
+          },
+          "matriculas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatriculaBajaDto"
+            },
+            "nullable": true
+          },
+          "bajas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatriculaBajaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAdminRequestDto": {
+        "required": [
+          "contraseña",
+          "usuarioEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "usuarioEmail": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$",
+            "type": "string",
+            "default": "email@escuela.com"
+          },
+          "contraseña": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAlumnoRequestDto": {
+        "required": [
+          "apellidos",
+          "ci",
+          "contraseña",
+          "nombre",
+          "usuarioEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Nombre"
+          },
+          "apellidos": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Apellidos"
+          },
+          "ci": {
+            "maxLength": 11,
+            "minLength": 11,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "default": "CI"
+          },
+          "usuarioEmail": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$",
+            "type": "string",
+            "default": "email@escuela.com"
+          },
+          "contraseña": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAulaProfesorRequestDto": {
+        "type": "object",
+        "properties": {
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCursoRequestDto": {
+        "required": [
+          "fechaFin",
+          "fechaInicio",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 250,
+            "minLength": 1,
+            "type": "string"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "default": "2025-10-03"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "default": "2025-10-03"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateEvaluacionRequestDto": {
+        "required": [
+          "alumnoId",
+          "nota",
+          "profesorId"
+        ],
+        "type": "object",
+        "properties": {
+          "alumnoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profesorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota": {
+            "maximum": 5,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMatriculaRequestDto": {
+        "required": [
+          "alumnoId",
+          "aulaId",
+          "carrera"
+        ],
+        "type": "object",
+        "properties": {
+          "alumnoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateProfesorRequestDto": {
+        "required": [
+          "apellidos",
+          "asignatura",
+          "aulaProfesores",
+          "ci",
+          "contraseña",
+          "nombre",
+          "usuarioEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Nombre"
+          },
+          "apellidos": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Apellidos"
+          },
+          "ci": {
+            "maxLength": 11,
+            "minLength": 11,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "default": "CI"
+          },
+          "usuarioEmail": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$",
+            "type": "string",
+            "default": "email@escuela.com"
+          },
+          "contraseña": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asignatura": {
+            "$ref": "#/components/schemas/Asignatura"
+          },
+          "aulaProfesores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateAulaProfesorRequestDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CursoActualDto": {
+        "type": "object",
+        "properties": {
+          "aula": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alumnos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CursoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CursoDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CursoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionAlumnoDto": {
+        "type": "object",
+        "properties": {
+          "asignatura": {
+            "type": "string",
+            "nullable": true
+          },
+          "calificacion": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionDto": {
+        "type": "object",
+        "properties": {
+          "profesor": {
+            "type": "string",
+            "nullable": true
+          },
+          "alumno": {
+            "type": "string",
+            "nullable": true
+          },
+          "asignatura": {
+            "$ref": "#/components/schemas/Asignatura"
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaEvaluacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionesAlumnoCursoActualReporteDto": {
+        "type": "object",
+        "properties": {
+          "alumno": {
+            "type": "string",
+            "nullable": true
+          },
+          "año": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "evaluaciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluacionAlumnoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionesAlumnoPorAñoReporteDto": {
+        "type": "object",
+        "properties": {
+          "alumno": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluacionesPorAño": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AñoEvaluacionesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionesPorAulasPorAñoReporteDto": {
+        "type": "object",
+        "properties": {
+          "profesor": {
+            "type": "string",
+            "nullable": true
+          },
+          "añosEscolares": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AñoEscolarDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluacionesPorAulasPorAñoReporteDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluacionesPorAulasPorAñoReporteDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequestDto": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email",
+            "default": "admin@admin.com"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string",
+            "default": "Admin123!"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatriculaAulaDto": {
+        "type": "object",
+        "properties": {
+          "alumnoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatriculaBajaDto": {
+        "type": "object",
+        "properties": {
+          "alumno": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatriculaListaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfesorAulaDto": {
+        "type": "object",
+        "properties": {
+          "profesorId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfesorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "ci": {
+            "type": "string",
+            "nullable": true
+          },
+          "asignatura": {
+            "$ref": "#/components/schemas/Asignatura"
+          },
+          "aulaProfesores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AulaProfesorDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfesorDtoPaginacion": {
+        "type": "object",
+        "properties": {
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDePaginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDeRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfesorDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAlumnoRequestDto": {
+        "required": [
+          "apellidos",
+          "ci",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Nombre"
+          },
+          "apellidos": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Apellidos"
+          },
+          "ci": {
+            "maxLength": 11,
+            "minLength": 11,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "default": "CI"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAulaProfesorDto": {
+        "type": "object",
+        "properties": {
+          "profesorId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAulaRequestDto": {
+        "required": [
+          "carrera",
+          "profesorAulas"
+        ],
+        "type": "object",
+        "properties": {
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          },
+          "profesorAulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateAulaProfesorDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateEvaluacionRequestDto": {
+        "required": [
+          "nota"
+        ],
+        "type": "object",
+        "properties": {
+          "nota": {
+            "maximum": 5,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMatriculaRequestDto": {
+        "required": [
+          "alumnoId",
+          "aulaId",
+          "carrera"
+        ],
+        "type": "object",
+        "properties": {
+          "alumnoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrera": {
+            "$ref": "#/components/schemas/Carrera"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProfesorRequestDto": {
+        "required": [
+          "apellidos",
+          "asignatura",
+          "aulaProfesores",
+          "ci",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Nombre"
+          },
+          "apellidos": {
+            "maxLength": 250,
+            "minLength": 1,
+            "pattern": "^([A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)(\\s[A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]*)*$",
+            "type": "string",
+            "default": "Apellidos"
+          },
+          "ci": {
+            "maxLength": 11,
+            "minLength": 11,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "default": "CI"
+          },
+          "asignatura": {
+            "$ref": "#/components/schemas/Asignatura"
+          },
+          "aulaProfesores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateAulaProfesorRequestDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header usando el esquema Bearer. Ejemplo: \"Authorization: Bearer {token}\"",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
